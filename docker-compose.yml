@@ -1,5 +1,11 @@
 version: "3"
 services:
+
+  front:
+    build: ./front
+    ports:
+      - "4000:4000"
+
   backend:
     build: ./backend
     container_name: app_backend
@@ -27,6 +33,7 @@ services:
       - "8080:80"
     links:
       - "backend"
+      - "front"
 #   volumes:
 #     - ./front/build:/app:ro
 
