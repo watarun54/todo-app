@@ -1,0 +1,32 @@
+version: "3"
+services:
+  backend:
+    build: ./backend
+    container_name: app_backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    links:
+      - mysql
+
+  mysql:
+    build: ./mysql
+    container_name: app_mysql
+    volumes:
+      - ./mysql/mysql_data:/var/lib/mysql # データの永続化
+      - ./mysql/sqls:/docker-entrypoint-initdb.d # 初期データ投入
+    environment:
+      MYSQL_ROOT_PASSWORD: wataru0224 #rootパスワードの設定
+      MYSQL_DATABASE: myapp
+    
+  nginx:
+    build: ./nginx
+    container_name: app_nginx
+    ports:
+      - "8080:80"
+    links:
+      - "backend"
+#   volumes:
+#     - ./front/build:/app:ro
+
