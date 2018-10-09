@@ -1,10 +1,10 @@
 version: "3"
 services:
 
-  front:
-    build: ./front
-    ports:
-      - "4000:4000"
+#  front:
+#    build: ./front
+#    ports:
+#      - "4000:4000"
 
   backend:
     build: ./backend
@@ -33,7 +33,6 @@ services:
       - "8080:80"
     links:
       - "backend"
-      - "front"
-#   volumes:
-#     - ./front/build:/app:ro
+    volumes:
+      - ./front/build:/app:ro
 
